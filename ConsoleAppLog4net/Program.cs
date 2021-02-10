@@ -11,10 +11,12 @@ namespace ConsoleAppLog4net
         private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         static void Main(string[] args)
-        {
+        { 
             // Load configuration
             var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
-            XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));
+            string LogName = logRepository.GetType().Assembly.GetName().Name + ".log";
+            log4net.GlobalContext.Properties["LogName"] = "1.txt";
+            XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));           
 
             Console.WriteLine("Hello world!");
 
