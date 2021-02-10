@@ -15,16 +15,17 @@ namespace ConsoleAppLog4net
             // Load configuration
             var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
             string LogName = logRepository.GetType().Assembly.GetName().Name + ".log";
-            log4net.GlobalContext.Properties["LogName"] = "1.txt";
-            XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));           
 
-            Console.WriteLine("Hello world!");
+            for(int i=1; i <= 10; i++)
+            { 
+                log4net.GlobalContext.Properties["LogName"] = $"{i}.txt";
+                XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));           
+             
 
-            // Log some things
-            log.Info("Hello logging world!");
-            log.Error("Error!");
-            log.Warn("Warn!");
-
+                // Log some things
+                log.Info("Hello logging world! "+$"{i}");
+                 
+            }
             Console.ReadLine();
         }
     }
